@@ -7,6 +7,7 @@ gem "rails", "~> 7.1.3"
 gem "pg", "~> 1.1" # PostgreSQL database adapter
 gem "puma", ">= 5.0" # Puma web server
 gem "bootsnap", require: false # Caching for faster boot times
+gem 'dotenv-rails'
 
 # Telegram Bot
 gem 'telegram-bot-ruby'
