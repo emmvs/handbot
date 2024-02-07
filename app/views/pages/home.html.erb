@@ -1,0 +1,12 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<div class="container m-5 bg-gray">
+  <h1>👋 Welcome to HandBot</h1>
+  <h3>by <a href="https://handbookgermany.de/en">handbook germany</a></h3>
+  <p>Help from A to Z</p>
+  <%# user id %>
+  <%= link_to 'Send Private Message', "https://api.telegram.org/bot6431968803:AAEd4jpPVnTodP-TBFHYrhrjDbrhXRjNjqw/sendMessage?chat_id=262447015&text=Hello", target: "_blank" %>
+  <br>
+  <%# grou id %>
+  <%= link_to 'Send Group Message', "https://api.telegram.org/bot6431968803:AAEd4jpPVnTodP-TBFHYrhrjDbrhXRjNjqw/sendMessage?chat_id=-4150806538&text=👋 Hello, and welcome to the HandBot! How can I help you?", target: "_blank" %>
+</div>
