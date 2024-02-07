@@ -2,16 +2,14 @@ class WebhooksController < ApplicationController
   # skip_before_action :verify_authenticity_token
 
   def callback
-    update = params.as_json
-    Rails.logger.info("Received Telegram update: #{update.inspect}")
-
-    if update['message'].present?
-      chat_id = update['message']['chat']['id']
-      text = update['message']['text']
-
-      send_message(chat_id, "You said: #{text}")
+    unless params[:message].present?
+      return render json: { error: 'Invalid data' }, status: :bad_request
     end
 
+    chat_id = params[:message][:chat][:id]
+    text = params[:message][:text]
+
+    send_message(chat_id, "Your request was: #{text}")
     head :ok
   end
 
@@ -24,8 +22,12 @@ class WebhooksController < ApplicationController
       chat_id: chat_id,
       text: text
     }
-
-    RestClient.post(url, payload.to_json, {content_type: :json, accept: :json})
+    begin
+      RestClient.post(url, payload.to_json, {content_type: :json, accept: :json})
+    rescue RestClient::BadRequest => e
+      Rails.logger.error "Failed to send message: #{e.response}"
+      render json: { error: 'Bad request to Telegram API' }, status: :bad_request
+    end
   end
 end
 
