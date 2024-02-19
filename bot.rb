@@ -1,5 +1,4 @@
 require 'telegram/bot'
-
 require 'httparty'
 require 'nokogiri'
 
@@ -38,10 +37,12 @@ Telegram::Bot::Client.run(token) do |bot|
   end
 end
 
-
 # Send a message to person w/ user ID
-# https://api.telegram.org/bot6431968803:AAEd4jpPVnTodP-TBFHYrhrjDbrhXRjNjqw/sendMessage?chat_id=262447015&text=Hello
+# https://api.telegram.org/botBOT_TOKEN/sendMessage?chat_id=262447015&text=Hello
 
-# https://api.telegram.org/bot6431968803:AAEd4jpPVnTodP-TBFHYrhrjDbrhXRjNjqw/sendMessage?chat_id=#{user_id}&text=#{text}
+# https://api.telegram.org/botBOT_TOKEN/sendMessage?chat_id=#{user_id}&text=#{text}
 
-# https://api.telegram.org/bot6431968803:AAEd4jpPVnTodP-TBFHYrhrjDbrhXRjNjqw/sendMessage?chat_id=#{group_id}&text=#{text}
+# https://api.telegram.org/botBOT_TOKEN/sendMessage?chat_id=#{group_id}&text=#{text}
+
+# Get Webhook Info
+# https://api.telegram.org/botBOT_TOKEN/getWebhookInfo
