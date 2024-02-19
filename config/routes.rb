@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # Homepage
   root 'pages#home'
-  post '/webhook', to: 'webhooks#callback'
+
+  # Receiving messages from Telegram & User
+  # post '/', to: 'webhooks#receive'
+  post '/receive', to: 'webhooks#receive'
 end
