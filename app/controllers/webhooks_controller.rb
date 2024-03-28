@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The WebhooksController handles incoming webhook requests from Telegram API
 # responding to messages sent to the Telegram bot associated with this application.
 # It includes methods for validating and processing incoming messages (`callback`),
@@ -9,8 +11,9 @@ class WebhooksController < ApplicationController
   def receive
     if valid_message_received?
       process_user_message
+      render json: { message: 'Message processed successfully' }, status: :ok unless performed?
     else
-      render_no_message_error
+      render_no_message_error unless performed?
     end
   end
 
