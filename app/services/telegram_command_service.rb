@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The TelegramCommandService is responsible for interpreting the command received from the user
 # and generating the appropriate response
 # This service aims to encapsulate the logic for handling different commands
