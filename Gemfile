@@ -5,8 +5,6 @@ source 'https://rubygems.org'
 ruby '3.1.2'
 
 # Core Rails Gems
-gem 'bootsnap', require: false # Caching for faster boot times
-gem 'dotenv-rails'
 gem 'pg', '~> 1.1' # PostgreSQL database adapter
 gem 'puma', '>= 5.0' # Puma web server
 gem 'rails', '~> 7.1.3'
@@ -28,18 +26,29 @@ gem 'telegram-bot-ruby'
 # gem 'image_processing', '~> 1.2' # Active Storage image variants
 # gem 'rack-cors' # Handling CORS for cross-origin Ajax
 
-# Platform-specific Gems
-gem 'tzinfo-data', platforms: %i[mswin mswin64 mingw x64_mingw jruby] # Timezone data for Windows
+# Performance & Optimization
+gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
+gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ] # Timezone data for Windows
 
 # Development and Test Environment
 group :development, :test do
   gem 'debug', platforms: %i[mri mswin mswin64 mingw x64_mingw]
+  gem 'dotenv-rails'
+  gem 'faker'
   gem 'pry-byebug'
-  gem 'rspec-rails', '6.1.1'
-  gem 'rubocop', require: false
+  gem 'rspec-rails', '~> 6.0.2'
 end
 
 group :development do
   # gem 'spring' # Speed up commands on slow machines
   gem 'error_highlight', '>= 0.4.0', platforms: [:ruby] # Highlight errors
+  gem 'rubocop', require: false
+end
+
+group :test do
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem 'capybara'
+  gem 'factory_bot_rails'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 6.0'
 end
