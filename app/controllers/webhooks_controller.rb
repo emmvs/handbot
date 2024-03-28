@@ -13,6 +13,7 @@ class WebhooksController < ApplicationController
       process_user_message
       render json: { message: 'Message processed successfully' }, status: :ok unless performed?
     else
+      puts 'Invalid message received'
       render_no_message_error unless performed?
     end
   end
