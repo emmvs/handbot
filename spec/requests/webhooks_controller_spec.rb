@@ -19,7 +19,7 @@ RSpec.describe WebhooksController, type: :request do
 
       it "#{response_status} when receiving a #{command} command" do
         allow_any_instance_of(TelegramCommandService).to receive(:call).and_return("#{command} command response")
-        post '/receive', params:
+        post '/receive', params: params
         expect(response).to have_http_status(response_status)
       end
     end
