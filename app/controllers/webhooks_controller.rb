@@ -21,13 +21,14 @@ class WebhooksController < ApplicationController
   def process_user_message
     chat_id = extract_chat_id
     username = extract_username
-    text = params[:message][:text]
+    language_code = extract_language_code
+    user_command = extract_user_command
 
-    if command?(text)
-      response = TelegramCommandService.new(chat_id, text).call(username)
+    if command?(user_command)
+      response = TelegramCommandService.new(chat_id, user_command, language_code, username).call
       send_message(chat_id, response)
     else
-      search_keyword_and_respond(chat_id, username, text)
+      search_keyword_and_respond(chat_id, username, user_command)
     end
   end
 
@@ -49,10 +50,13 @@ class WebhooksController < ApplicationController
     params[:message][:from][:first_name]
   end
 
-  # def extract_keyword(query)
-  #   query.downcase.include?('anmeldung') ? 'anmeldung' : nil
-  #   # TODO: Extend w/ GPT
-  # end
+  def extract_language_code
+    params[:message][:from][:language_code]
+  end
+
+  def extract_user_command
+    params[:message][:text].downcase
+  end
 
   def search_keyword_and_respond(chat_id, first_name, keyword)
     return send_unrecognized_query_response(chat_id, first_name) unless keyword == 'anmeldung'
@@ -71,7 +75,7 @@ class WebhooksController < ApplicationController
   end
 
   def send_unrecognized_query_response(chat_id, first_name)
-    response_text = "Hi #{first_name}, I'm not sure how to help with that. Can you try asking about something else?"
+    response_text = "Hi #{first_name}, I'm not sure how to help with that. Can you try asking about something else with /start?"
     send_message(chat_id, response_text)
   end
 
@@ -80,7 +84,7 @@ class WebhooksController < ApplicationController
     "https://handbookgermany.de/en/search/content?keys=#{keyword}"
   end
 
-  def send_message(chat_id, text, disable_web_page_preview = false)
+  def send_message(chat_id, text, disable_web_page_preview: false)
     token = ENV['CHAT_BOT_TOKEN']
     url = "https://api.telegram.org/bot#{token}/sendMessage"
     payload = { chat_id:, text:, disable_web_page_preview: }
