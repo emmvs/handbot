@@ -67,12 +67,20 @@
 # http://t.me/Diia_help_bot
 
 # ? When restarting ngrok, we also need to restart the webhook
-# curl -X POST \                                                                            [🐍 emmvs]
+# TODO: Update YOUR_BOT_TOKEN="your_bot_token_here"
+# TODO: Update ngrok link w/ new ngrok url
+
+# YOUR_BOT_TOKEN="TOKEN_STRING"
+
+# curl -X POST \
 #      -H "Content-Type: application/json" \
-#      -d '{"url": "https://a4ef-88-68-168-137.ngrok-free.app/receive"}' \
-#      "https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook"
+#      -d '{"url": "https://f0bf-213-61-167-82.ngrok-free.app/receive"}' \
+#      "https://api.telegram.org/bot${YOUR_BOT_TOKEN}/setWebhook"
 
 # When you restart ngrok, it generates a new random URL for your tunnel.
 # Since the Telegram bot's webhook URL is configured to use the ngrok URL,
 # you'll need to update the webhook URL with the new ngrok URL every time you restart ngrok
 # This needs to happen until the app gets deloyed and we have the same URL
+
+# You should get the output below 👇🏻
+# {"ok":true,"result":true,"description":"Webhook was set"}
