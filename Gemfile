@@ -19,6 +19,9 @@ gem 'jbuilder' # JSON APIs
 gem 'rest-client'
 gem 'telegram-bot-ruby'
 
+# Translation
+gem 'i18n'
+
 # Optional/Commented Out Gems
 # gem 'redis', '>= 4.0.1' # Redis adapter for Action Cable
 # gem 'kredis' # Higher-level data types in Redis

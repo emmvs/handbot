@@ -365,6 +365,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   httparty
+  i18n
   jbuilder
   pg (~> 1.1)
   pry-byebug
