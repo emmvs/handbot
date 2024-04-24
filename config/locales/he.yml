@@ -1,0 +1,19 @@
+he:
+  telegram_commands:
+    initial_greeting: "👋 שלום %{username}! ברוך הבא ל-HandBot!"
+    help_response: |
+      הנה איך אתה יכול להשתמש ב-HandBot:
+
+      לחץ על '/search' כדי להתחיל חיפוש.
+      לחץ על '/language' כדי לשנות שפה.
+      לחץ על '/settings' כדי לשנות הגדרות.
+      לחץ על '/help' אם אתה לא מקבל תגובה מתאימה.
+
+      כיצד אוכל לעזור לך?
+    settings_response: |
+      הנה האפשרויות שלך להגדרות:
+
+      לחץ על '/language' כדי לשנות שפה.
+      לחץ על '/name' כדי לשנות את שמך.
+    default_response: "מצטער, לא הבנתי. נסה '/help' לאפשרויות נוספות."
+    unknown_command_response: "מצטער, לא הבנתי. נסה '/help' לאפשרויות נוספות."

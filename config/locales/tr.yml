@@ -1,0 +1,19 @@
+tr:
+  telegram_commands:
+    initial_greeting: "👋 Merhaba %{username}! HandBot'a hoş geldiniz!"
+    help_response: |
+      HandBot'u nasıl kullanabileceğiniz aşağıda belirtilmiştir:
+
+      Aramaya başlamak için '/search' basın.
+      Dilinizi değiştirmek için '/language' basın.
+      Ayarlarınızı değiştirmek için '/settings' basın.
+      Uygun bir yanıt alamazsanız '/help' basın.
+
+      Size nasıl yardımcı olabilirim?
+    settings_response: |
+      İşte ayar seçenekleriniz:
+
+      Dilinizi değiştirmek için '/language' basın.
+      İsminizi değiştirmek için '/name' basın.
+    default_response: "Üzgünüm, anlamadım. Daha fazla seçenek için '/help' deneyin."
+    unknown_command_response: "Üzgünüm, anlamadım. Daha fazla seçenek için '/help' deneyin."

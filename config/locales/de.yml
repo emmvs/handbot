@@ -1,0 +1,41 @@
+de:
+  telegram_commands:
+    initial_greeting: |
+      👋 Hallo %{username}! Willkommen bei HandBot!
+      So können Sie den HandBot nutzen:
+
+      Tippe auf '/search', um die Suche zu beginnen.
+      Tippe auf '/language', um die Sprache zu ändern.
+      Tippe auf '/settings', um die Einstellungen zu ändern.
+      Tippe auf '/help', wenn Hilfe benötigt wird.
+
+      Wie kann ich weiterhelfen?
+    help_response: |
+      So können Sie den HandBot nutzen:
+
+      Tippe auf '/search', um die Suche zu beginnen.
+      Tippe auf '/language', um die Sprache zu ändern.
+      Tippe auf '/settings', um die Einstellungen zu ändern.
+      Tippe auf '/help', wenn Hilfe benötigt wird.
+
+      Wie kann ich weiterhelfen?
+    prompt_for_search: "Welches Thema interessiert Sie? Geben Sie es ein, und ich werde danach suchen!"
+    settings_response: |
+      Hier sind Ihre Einstellungsoptionen:
+
+      Tippe auf '/language', um die Sprache zu ändern.
+      Tippe auf '/name', um Ihren Namen zu ändern.
+    default_response: "Entschuldigung, das habe ich nicht verstanden. Versuche es mit /help für weitere Optionen."
+    unknown_command_response: "Entschuldigung, das habe ich nicht verstanden. Versuche es mit /help für mehr Optionen."
+
+  languages:
+    en: "English"
+    de: "Deutsch"
+    uk: "Ukrainian"
+    ar: "Arabic"
+    fa: "Persian"
+    tr: "Turkish"
+    fr: "French"
+    ps: "Pashto"
+    ru: "Russian"
+    he: "Hebrew"
