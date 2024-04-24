@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'yaml'
+
 # The TelegramCommandService is responsible for interpreting the command received from the user
 # and generating the appropriate response
 # This service aims to encapsulate the logic for handling different commands
@@ -7,16 +9,32 @@
 # Each public method within the service corresponds to a specific command,
 # simplifying the command processing workflow within the bot's controllers or other services
 class TelegramCommandService
-  attr_reader :chat_id, :command
+  LOCALES_DIR = File.join(Dir.pwd, 'config', 'locales')
 
-  def initialize(chat_id, command)
+  SUPPORTED_LANGUAGES = {
+    'en' => 'English',
+    'de' => 'German',
+    'uk' => 'Ukrainian',
+    'ar' => 'Arabic',
+    'fa' => 'Persian',
+    'tr' => 'Turkish',
+    'fr' => 'French',
+    'ps' => 'Pashto',
+    'ru' => 'Russian'
+  }.freeze
+
+  attr_reader :chat_id, :command, :user_language
+
+  def initialize(chat_id, command, user_language, username)
     @chat_id = chat_id
-    @command = command.downcase
+    @command = command
+    @user_language = user_language
+    @username = username
   end
 
   def call(*args)
     action = command_method
-    # Checks number of expected arguments
+    # Calls #action w/o arguments if it expects none, otherwise passes arguments
     method(action).arity.zero? ? send(action) : send(action, *args)
   end
 
@@ -33,47 +51,84 @@ class TelegramCommandService
     end
   end
 
-  def send_initial_greeting(username = nil)
-    greeting = '👋 Hey there'
-    greeting += ", #{username}" if username
-    greeting + "! Welcome to HandBot!
-
-    We're here to help you find information about Germany through handbookgermany.de. Please select one of the following options to get started:
-
-    Press '/search' to begin your search
-    Press '/language' to change your language
-    Press '/settings' to change your settings
-    Press '/help' if you don't get a proper response from the bot
-
-    How can I help you?"
+  def send_initial_greeting
+    translate('telegram_commands.initial_greeting', username: @username)
   end
 
   def send_help_response
-    # Logic for sending help response
-    "Here's how you can use HandBot: ..."
+    translate('telegram_commands.help_response')
   end
 
   def prompt_for_search
-    # Logic to prompt user for search
-    "What topic are you interested in? Just type and I'll look it up for you!"
+    translate('telegram_commands.prompt_for_search')
   end
 
   def send_settings_response
-    # Logic for sending settings options
-    'Here are your settings options: ...'
+    translate('telegram_commands.settings_response')
   end
 
   def send_language_options
-    # Logic for sending language options
-    'You can change the language. Current options are: ...'
+    supported_languages_list
+  end
+
+  def change_to_en
+    # TODO: Change @user_language w/ new language_code
+    # translate('language_change_confirmation')
+  end
+
+  def change_to_de
+    # TODO: Change @user_language w/ new language_code
+    # translate('language_change_confirmation')
+  end
+
+  def change_to_uk
+    # TODO: Change @user_language w/ new language_code
+    # translate('language_change_confirmation')
   end
 
   def send_default_response
-    # Fallback message for unrecognized commands
-    "Sorry, I didn't understand that. Try /help for more options."
+    translate('telegram_commands.default_response')
   end
 
   def handle_unknown_command
-    "Sorry, I didn't understand that. Try /help for more options."
+    translate('telegram_commands.unknown_command_response')
+  end
+
+  def supported_languages_list
+    SUPPORTED_LANGUAGES.map do |code, _|
+      translated_name = translate("languages.#{code}")
+      "#{translated_name} (/#{code})"
+    end.join(', ')
+  end
+
+  def translate(yaml_key, attributes = {})
+    message_template = fetch_translation(yaml_key)
+    message_template ||= fetch_fallback_translation(yaml_key) || missing_translation(yaml_key)
+    message_template ? format(message_template, attributes) : missing_translation(yaml_key)
+  end
+
+  def fetch_translation(yaml_key)
+    translations = load_translations(@user_language)
+    translations.dig(@user_language, *yaml_key.split('.'))
+  end
+
+  def fetch_fallback_translation(yaml_key)
+    return if @user_language == 'en'
+
+    english_translations = load_translations('en')
+    english_translations.dig(@user_language, *yaml_key.split('.'))
+  end
+
+  def load_translations(lang)
+    file_path = target_file(lang)
+    YAML.load_file(file_path)
+  end
+
+  def missing_translation(yaml_key)
+    "Translation missing for '#{yaml_key}'. 😭"
+  end
+
+  def target_file(lang_code)
+    File.join(LOCALES_DIR, "#{lang_code}.yml")
   end
 end
