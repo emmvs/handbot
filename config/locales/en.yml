@@ -1,32 +1,34 @@
 en:
   telegram_commands:
     initial_greeting: |
-      👋 Hello %{username}! Welcome to HandBot!
-      Here's how you can use HandBot:
+      👋 Welcome, %{username}!
+      I’m HandBot, and I am here to help you navigate life in Germany 🇩🇪
 
-      Press '/search' to begin your search.
-      Press '/language' to change your language.
-      Press '/settings' to change your settings.
-      Press '/help' if you need further assistance.
+      You can ask me about things like Anmeldung 📄, finding a flat 🏠, public transportation 🚂, or accessing healthcare services 🤒.
 
-      How can I assist you?
+      Let's make your journey smooth!
+
+      Just type what you need help with or use /search to explore topics.
+
+      How can I help you today? ☀️
     help_response: |
-      Here's how you can use HandBot:
+      Here’s how I can make your life easier:
 
-      Press '/search' to begin your search.
-      Press '/language' to change your language.
-      Press '/settings' to change your settings.
-      Press '/help' if you need further assistance.
+      • /search to find information on anything from Anmeldung to job hunting
+      • /language to communicate in your preferred language
+      • /help if you need more guidance
 
-      How can I assist you?
-    prompt_for_search: "What topic are you interested in? Just type it in, and I'll search for it!"
+      What are you looking for today?
+    prompt_for_search: "What are you looking to find out? Type it in, and I’ll do the searching for you!"
     settings_response: |
-      Here are your settings options:
+      Let's adjust your settings:
 
-      Press '/language' to change your language.
-      Press '/name' to change your name.
-    default_response: "Sorry, I didn't understand that. Try '/help' for more options."
-    unknown_command_response: "Sorry, I didn't understand that. Try '/help' for more options."
+      • /language to change your language
+      • /name to update your name
+
+      Anything else you'd like to tweak?
+    default_response: "Hmm, I’m not sure what that was. Can you try /help or specify what you need?"
+    unknown_command_response: "I didn’t quite catch that. Maybe /help could guide us?"
 
   languages:
     en: "English"
