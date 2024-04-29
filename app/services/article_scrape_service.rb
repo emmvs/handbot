@@ -6,7 +6,7 @@ require 'nokogiri'
 
 # Handles scraping and searching articles from the HBG Website (In case of API being down)
 class ArticleScrapeService
-  BASE_URL = 'https://handbookgermany.de/de/search/content'
+  BASE_URL = ENV['HANDBOOK_SEARCH_URI']
 
   def self.scrape_articles(keyword)
     search_url = "#{BASE_URL}?keys=#{keyword}"
