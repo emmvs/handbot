@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
+require 'rest-client'
+require_relative '../services/article_search_service'
+require_relative '../services/article_scrape_service'
+require_relative '../services/telegram_command_service'
+
 # The WebhooksController handles incoming webhook requests from Telegram API
 # responding to messages sent to the Telegram bot associated with this application.
 # It includes methods for validating and processing incoming messages (`callback`),
 # acknowledging webhook setup (`receive`), and sending messages back to the user
+# via the TelegramCommandService
 class WebhooksController < ApplicationController
   # Uncomment if you need to skip CSRF token verification
   # skip_before_action :verify_authenticity_token
@@ -11,24 +17,9 @@ class WebhooksController < ApplicationController
   def receive
     if valid_message_received?
       process_user_message
-      render json: { message: 'Message processed successfully' }, status: :ok unless performed?
+      render json: { message: 'Message processed successfully' }, status: :ok
     else
-      puts 'Invalid message received'
-      render_no_message_error unless performed?
-    end
-  end
-
-  def process_user_message
-    chat_id = extract_chat_id
-    username = extract_username
-    language_code = extract_language_code
-    user_command = extract_user_command
-
-    if command?(user_command)
-      response = TelegramCommandService.new(chat_id, user_command, language_code, username).call
-      send_message(chat_id, response)
-    else
-      search_keyword_and_respond(chat_id, username, user_command)
+      render json: { error: 'Invalid request' }, status: :bad_request
     end
   end
 
@@ -38,71 +29,25 @@ class WebhooksController < ApplicationController
     params[:message].present?
   end
 
-  def extract_chat_id
-    params[:message][:chat][:id]
+  def process_user_message
+    extract_user_info
+    telegram_service = TelegramCommandService.new(@chat_id, @command_input, @language_code, @username)
+    response = telegram_service.call
+
+    send_message(@chat_id, response)
   end
 
-  def command?(text)
-    text.start_with?('/')
+  def extract_user_info
+    @chat_id = params[:message][:chat][:id]
+    @command_input = params[:message][:text]
+    @language_code = params[:message][:from][:language_code]
+    @username = params[:message][:from][:first_name]
   end
 
-  def extract_username
-    params[:message][:from][:first_name]
-  end
-
-  def extract_language_code
-    params[:message][:from][:language_code]
-  end
-
-  def extract_user_command
-    params[:message][:text].downcase
-  end
-
-  def search_keyword_and_respond(chat_id, first_name, keyword)
-    return send_unrecognized_query_response(chat_id, first_name) unless keyword == 'anmeldung'
-
-    link = search_for_keyword(keyword)
-    message = build_response_message(first_name, keyword, link)
-    send_message(chat_id, message)
-  end
-
-  def build_response_message(first_name, keyword, link)
-    if link
-      "Here's something I found about #{keyword}: #{link}"
-    else
-      "Sorry, #{first_name}, I couldn't find any information about #{keyword}."
-    end
-  end
-
-  def send_unrecognized_query_response(chat_id, first_name)
-    response_text = "Hi #{first_name}, I'm not sure how to help with that. Can you try asking about something else with /start?"
-    send_message(chat_id, response_text)
-  end
-
-  def search_for_keyword(keyword)
-    # TODO: Adjust w/ API
-    "https://handbookgermany.de/en/search/content?keys=#{keyword}"
-  end
-
-  def send_message(chat_id, text, disable_web_page_preview: false)
+  def send_message(chat_id, text)
     token = ENV['CHAT_BOT_TOKEN']
     url = "https://api.telegram.org/bot#{token}/sendMessage"
-    payload = { chat_id:, text:, disable_web_page_preview: }
-    post_message(url, payload)
-  end
-
-  def post_message(url, payload)
-    RestClient.post(url, payload.to_json, { content_type: :json, accept: :json })
-  rescue RestClient::BadRequest => e
-    handle_send_message_error(e.response)
-  end
-
-  def handle_send_message_error(response)
-    Rails.logger.error "Failed to send message: #{response}"
-    render json: { error: 'Bad request to Telegram API' }, status: :unprocessable_entity
-  end
-
-  def render_no_message_error
-    render json: { error: 'No message received' }, status: :unprocessable_entity
+    payload = { chat_id:, text: }
+    RestClient.post(url, payload.to_json, content_type: :json, accept: :json)
   end
 end
