@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Handels Static pages like '/home'
 class PagesController < ApplicationController
   include ActionController::Rendering
   include ActionView::Layouts
