@@ -1,20 +1,33 @@
 ar:
-  telegram_commands:
-    initial_greeting: "👋 مرحباً %{username}! أهلاً بك في HandBot!"
-    help_response: |
-      إليك كيف يمكنك استخدام HandBot:
+  initial_greeting: "👋 مرحباً %{username}! أهلاً بك في HandBot!"
+  help_response: |
+    إليك كيف يمكنك استخدام HandBot:
 
-      اضغط على '/search' لبدء البحث.
-      اضغط على '/language' لتغيير اللغة.
-      اضغط على '/settings' لتغيير الإعدادات.
-      اضغط على '/help' إذا كنت بحاجة إلى مساعدة.
+    اضغط على '/search' لبدء البحث.
+    اضغط على '/language' لتغيير اللغة.
+    اضغط على '/settings' لتغيير الإعدادات.
+    اضغط على '/help' إذا كنت بحاجة إلى مساعدة.
 
-      كيف يمكنني مساعدتك؟
-    prompt_for_search: "ما الموضوع الذي تريد البحث عنه؟ فقط اكتبه وسأقوم بالبحث!"
-    settings_response: |
-      إليك خيارات الإعدادات:
+    كيف يمكنني مساعدتك؟
+  search_prompt: "ما الموضوع الذي تريد البحث عنه؟ فقط اكتبه وسأقوم بالبحث!"
+  articles_found: 'Translations missing in ar.yml'
+  no_article_found: 'Translations missing in ar.yml'
+  settings_response: |
+    إليك خيارات الإعدادات:
 
-      اضغط على '/language' لتغيير اللغة.
-      اضغط على '/name' لتغيير اسمك.
-    default_response: "آسف، لم أفهم ذلك. حاول '/help' لمزيد من الخيارات."
-    unknown_command_response: "آسف، لم أفهم ذلك. حاول '/help' لمزيد من الخيارات."
+    اضغط على '/language' لتغيير اللغة.
+    اضغط على '/name' لتغيير اسمك.
+  default_response: "آسف، لم أفهم ذلك. حاول '/help' لمزيد من الخيارات."
+  unknown_command_response: "آسف، لم أفهم ذلك. حاول '/help' لمزيد من الخيارات."
+
+languages:
+  en: 'Translations missing in ar.yml'
+  de: 'Translations missing in ar.yml'
+  uk: 'Translations missing in ar.yml'
+  ar: 'Translations missing in ar.yml'
+  fa: 'Translations missing in ar.yml'
+  tr: 'Translations missing in ar.yml'
+  fr: 'Translations missing in ar.yml'
+  ps: 'Translations missing in ar.yml'
+  ru: 'Translations missing in ar.yml'
+  he: 'Translations missing in ar.yml'

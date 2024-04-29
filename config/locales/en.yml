@@ -1,43 +1,47 @@
 en:
-  telegram_commands:
-    initial_greeting: |
-      👋 Welcome, %{username}!
-      I’m HandBot, and I am here to help you navigate life in Germany 🇩🇪
+  initial_greeting: |
+    👋 Welcome, %{username}!
+    I’m HandBot, and I am here to help you navigate life in Germany 🇩🇪
 
-      You can ask me about things like Anmeldung 📄, finding a flat 🏠, public transportation 🚂, or accessing healthcare services 🤒.
+    You can ask me about things like Anmeldung 📄, finding a flat 🏠, public transportation 🚂, or accessing healthcare services 🤒.
 
-      Let's make your journey smooth!
+    Let's make your journey smooth!
 
-      Just type what you need help with or use /search to explore topics.
+    Just type what you need help with or use /search to explore topics.
 
-      How can I help you today? ☀️
-    help_response: |
-      Here’s how I can make your life easier:
+    How can I help you today? ☀️
+  help_response: |
+    Here’s how I can make your life easier:
 
-      • /search to find information on anything from Anmeldung to job hunting
-      • /language to communicate in your preferred language
-      • /help if you need more guidance
+    • /search to find information on anything from Anmeldung to job hunting
+    • /language to communicate in your preferred language
+    • /settings to change your settings
+    • /help if you need more guidance
 
-      What are you looking for today?
-    prompt_for_search: "What are you looking to find out? Type it in, and I’ll do the searching for you!"
-    settings_response: |
-      Let's adjust your settings:
+    What are you looking for today?
+  search_prompt: "🚨 Please provide a keyword to search for. For example, type '/search_anmeldung'."
+  articles_found: "🕵🏼‍♀️ Here is what we found on the topic of %{topic}:
 
-      • /language to change your language
-      • /name to update your name
+  "
+  no_article_found: 'We were not able to find anything about %{topic}, sorry! Maybe try another word? 🤔'
+  settings_response: |
+    Let's adjust your settings:
 
-      Anything else you'd like to tweak?
-    default_response: "Hmm, I’m not sure what that was. Can you try /help or specify what you need?"
-    unknown_command_response: "I didn’t quite catch that. Maybe /help could guide us?"
+    • /language to change your language
+    • /name to update your name
 
-  languages:
-    en: "English"
-    de: "German"
-    uk: "Ukrainian"
-    ar: "Arabic"
-    fa: "Persian"
-    tr: "Turkish"
-    fr: "French"
-    ps: "Pashto"
-    ru: "Russian"
-    he: "Hebrew"
+    Anything else you'd like to tweak?
+  default_response: "Hmm, I’m not sure what that was. Can you try /help or specify what you need?"
+  unknown_command_response: "I didn’t quite catch that. Maybe /help could guide us?"
+
+languages:
+  en: "English"
+  de: "German"
+  uk: "Ukrainian"
+  ar: "Arabic"
+  fa: "Persian"
+  tr: "Turkish"
+  fr: "French"
+  ps: "Pashto"
+  ru: "Russian"
+  he: "Hebrew"

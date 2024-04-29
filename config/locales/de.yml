@@ -1,41 +1,46 @@
 de:
-  telegram_commands:
-    initial_greeting: |
-      👋 Hallo %{username}! Willkommen bei HandBot!
-      So können Sie den HandBot nutzen:
+  initial_greeting: |
+    👋 Hallo %{username}! Willkommen bei HandBot!
+    So können Sie den HandBot nutzen:
 
-      Tippe auf '/search', um die Suche zu beginnen.
-      Tippe auf '/language', um die Sprache zu ändern.
-      Tippe auf '/settings', um die Einstellungen zu ändern.
-      Tippe auf '/help', wenn Hilfe benötigt wird.
+    Tippe auf '/search', um die Suche zu beginnen.
+    Tippe auf '/language', um die Sprache zu ändern.
+    Tippe auf '/settings', um die Einstellungen zu ändern.
+    Tippe auf '/help', wenn Hilfe benötigt wird.
 
-      Wie kann ich weiterhelfen?
-    help_response: |
-      So können Sie den HandBot nutzen:
+    Wie kann ich weiterhelfen?
+  help_response: |
+    So kann HandBot helfen:
 
-      Tippe auf '/search', um die Suche zu beginnen.
-      Tippe auf '/language', um die Sprache zu ändern.
-      Tippe auf '/settings', um die Einstellungen zu ändern.
-      Tippe auf '/help', wenn Hilfe benötigt wird.
+    • /search um alles von Anmeldung bis Beruf zu finden
+    • /language um die Sprache zu ändern
+    • /settings um die Einstellungen zu ändern
+    • /help wenn Hilfe benötigt wird
 
-      Wie kann ich weiterhelfen?
-    prompt_for_search: "Welches Thema interessiert Sie? Geben Sie es ein, und ich werde danach suchen!"
-    settings_response: |
-      Hier sind Ihre Einstellungsoptionen:
+    Wie kann ich weiterhelfen?
+  search_prompt: "Bitte gib ein Wort ein nach dem du suchst. Zum Beispiel '/search_anmeldung'."
+  articles_found: "🕵🏼‍♀️ Wir haben zum Thema %{topic} folgendes gefunden:
+  
+  "
+  no_article_found: 'Schade, zum Thema %{topic} haben wir nichts gefunden!
+  
+  Probier vielleicht ein anderes Wort aus? 🤔'
+  settings_response: |
+    Hier sind die Einstellungen:
 
-      Tippe auf '/language', um die Sprache zu ändern.
-      Tippe auf '/name', um Ihren Namen zu ändern.
-    default_response: "Entschuldigung, das habe ich nicht verstanden. Versuche es mit /help für weitere Optionen."
-    unknown_command_response: "Entschuldigung, das habe ich nicht verstanden. Versuche es mit /help für mehr Optionen."
+    • /language um die Sprache zu ändern
+    • /name um den Namen zu ändern
+  default_response: "Entschuldigung, das habe ich nicht verstanden. Versuche es mit /help für weitere Optionen."
+  unknown_command_response: "Entschuldigung, das habe ich nicht verstanden. Versuche es mit /help für mehr Optionen."
 
-  languages:
-    en: "English"
-    de: "Deutsch"
-    uk: "Ukrainian"
-    ar: "Arabic"
-    fa: "Persian"
-    tr: "Turkish"
-    fr: "French"
-    ps: "Pashto"
-    ru: "Russian"
-    he: "Hebrew"
+languages:
+  en: "English"
+  de: "Deutsch"
+  uk: "Ukrainian"
+  ar: "Arabic"
+  fa: "Persian"
+  tr: "Turkish"
+  fr: "French"
+  ps: "Pashto"
+  ru: "Russian"
+  he: "Hebrew"
