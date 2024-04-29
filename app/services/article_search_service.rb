@@ -3,7 +3,9 @@
 require 'httparty'
 require 'json'
 
-# Handles fetching and searching articles from HBG Article API
+# The ArticleSearchService manages the retrieval and keyword-based searching
+# of articles through the Handbook Germany Article API,
+# efficiently fetching and formatting relevant content using search criteria
 class ArticleSearchService
   include HTTParty
   API_BASE_URI = ENV['API_BASE_URI']

@@ -4,14 +4,16 @@ require 'httparty'
 require 'open-uri'
 require 'nokogiri'
 
-# Handles scraping and searching articles from the HBG Website (In case of API being down)
+# The ArticleScrapeService handles the scraping and searching of articles
+# from the Handbook Germany website, providing a reliable fallback mechanism
+# for retrieving content in case the API is unavailable
 class ArticleScrapeService
   BASE_URL = ENV['HANDBOOK_SEARCH_URI']
 
   def self.scrape_articles(keyword)
     search_url = "#{BASE_URL}?keys=#{keyword}"
-    html_file = URI.open(search_url)
-    html_doc = Nokogiri::HTML(html_file)
+    response = HTTParty.get(search_url)
+    html_doc = Nokogiri::HTML(response.body)
     extract_articles(html_doc)
   end
 
