@@ -15,7 +15,7 @@ class CommandHandler
     @user = user
   end
 
-  def process_command(command, _args = []) # rubocop:disable Metrics/MethodLength
+  def process_command(command)
     command_handler = {
       '/start' => -> { handle_start },
       '/search' => -> { handle_search },
@@ -24,30 +24,20 @@ class CommandHandler
       '/language' => -> { handle_language }
     }
 
-    # Handle commands that start with '/search_' or are '/search'
-    if command.start_with?('/search_')
-      handle_search_with_keyword(command)
-    elsif command_handler[command]
-      command_handler[command].call
-    else
-      handle_unknown_command
-    end
+    handler = command_handler[command] || command_handler["/search_#{command}"] || method(:handle_unknown_command)
+    handler.call
   end
 
   private
 
   def handle_start
-    send_initial_greeting(find_username)
+    send_initial_greeting
   end
 
-  def send_initial_greeting(username)
+  def send_initial_greeting
     translation_key = 'initial_greeting'
-    interpolations = username ? { username: } : {}
+    interpolations = { username: @user.username }
     translate(translation_key, interpolations)
-  end
-
-  def find_username
-    @user.respond_to?(:username) ? @user.username : nil
   end
 
   def handle_search
