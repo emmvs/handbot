@@ -6,9 +6,9 @@ require_relative 'command_handler'
 # The TelegramCommandService is responsible for interpreting the command received from the user
 # and generating the appropriate response
 class TelegramCommandService
-  def initialize(chat_id, command, user_language, username)
-    @user = User.new(username, user_language, chat_id)
-    @command = command
+  def initialize(user)
+    @user = user
+    @command = user.command_input
   end
 
   def call
