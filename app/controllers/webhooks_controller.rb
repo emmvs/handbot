@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-require 'rest-client'
-require_relative '../services/article_search_service'
-require_relative '../services/article_scrape_service'
-require_relative '../services/telegram_command_service'
-
 # The WebhooksController handles incoming webhook requests from Telegram API
 # responding to messages sent to the Telegram bot associated with this application.
 # It includes methods for validating and processing incoming messages (`callback`),
@@ -31,17 +26,29 @@ class WebhooksController < ApplicationController
 
   def process_user_message
     extract_user_info
-    telegram_service = TelegramCommandService.new(@chat_id, @command_input, @language_code, @username)
+    telegram_service = TelegramCommandService.new(@user)
     response = telegram_service.call
-
-    send_message(@chat_id, response)
+    send_message(@user.chat_id, response)
   end
 
   def extract_user_info
-    @chat_id = params[:message][:chat][:id]
-    @command_input = params[:message][:text]
-    @language_code = params[:message][:from][:language_code]
-    @username = params[:message][:from][:first_name]
+    chat_id = extract_param(:message, :chat, :id)
+    chat_type = extract_param(:message, :chat, :type)
+    username = determine_username
+    language_code = extract_param(:message, :from, :language_code)
+    command_input = extract_param(:message, :text)
+
+    @user = User.new(chat_id, chat_type, username, language_code, command_input)
+  end
+
+  def extract_param(*keys)
+    params.dig(*keys)
+  end
+
+  def determine_username
+    first_name = extract_param(:message, :from, :first_name)
+    username = extract_param(:message, :from, :username)
+    first_name.exist? ? first_name : username
   end
 
   def send_message(chat_id, text)
