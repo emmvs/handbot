@@ -48,7 +48,7 @@ class WebhooksController < ApplicationController
   def determine_username
     first_name = extract_param(:message, :from, :first_name)
     username = extract_param(:message, :from, :username)
-    first_name.exist? ? first_name : username
+    first_name.empty? ? username : first_name
   end
 
   def send_message(chat_id, text)
