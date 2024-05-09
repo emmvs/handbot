@@ -66,15 +66,15 @@
 # Super popular bot by the government
 # http://t.me/Diia_help_bot
 
-# ? When restarting ngrok, we also need to restart the webhook
+# ? When restarting ngrok, we also need to reset the webhook
 # TODO: Update YOUR_BOT_TOKEN="your_bot_token_here"
 # TODO: Update ngrok link w/ new ngrok url
 
-# YOUR_BOT_TOKEN="TOKEN_STRING"
+# YOUR_BOT_TOKEN="YOUR_BOT_TOKEN_HERE"
 
 # curl -X POST \
 #      -H "Content-Type: application/json" \
-#      -d '{"url": "https://f0bf-213-61-167-82.ngrok-free.app/receive"}' \
+#      -d '{"url": "https://f708-84-130-234-178.ngrok-free.app/receive"}' \
 #      "https://api.telegram.org/bot${YOUR_BOT_TOKEN}/setWebhook"
 
 # When you restart ngrok, it generates a new random URL for your tunnel.
