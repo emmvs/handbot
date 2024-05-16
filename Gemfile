@@ -31,7 +31,7 @@ gem 'i18n'
 
 # Performance & Optimization
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
-gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ] # Timezone data for Windows
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby] # Timezone data for Windows
 
 # Development and Test Environment
 group :development, :test do
