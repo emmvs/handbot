@@ -57,9 +57,11 @@
 # Türkçe (Turkish) Français (French)پښتو (Pashto) Pусский (Russian) Українська (Ukrainian)
 # Im sorry, I did not find the article in your language, maybe this will be helpful: [article in Eng/Ger/etc.]
 
+# Researach about langauge within bot
+
 # API w/ full database of articles of handbook Germany
 
-# Need more help? Share your phone number, etc.
+# Need more help? >> Add Together in Germany in help section
 # HandBook Germany wants to collect what data?
 
 # Notes
