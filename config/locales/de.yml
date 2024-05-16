@@ -1,46 +1,37 @@
 de:
   initial_greeting: |
-    👋 Hallo %{username}! Willkommen bei HandBot!
-    So können Sie den HandBot nutzen:
+    👋 Willkommen, %{username}!
+    Ich bin HandBot, und ich bin hier, um dir das Leben in Deutschland 🇩🇪 zu erleichtern
 
-    Tippe auf '/search', um die Suche zu beginnen.
-    Tippe auf '/language', um die Sprache zu ändern.
-    Tippe auf '/settings', um die Einstellungen zu ändern.
-    Tippe auf '/help', wenn Hilfe benötigt wird.
+    Um dir am besten zu helfen, tippe /languages, um die verfügbaren Sprachen zu sehen.
 
-    Wie kann ich weiterhelfen?
+    • /help für Hilfe zur Nutzung der App
+    • /search, um nach etwas zu suchen
+    • /settings, um deine Einstellungen zu ändern
+
+    Wie kann ich dir heute helfen? ☀️
   help_response: |
-    So kann HandBot helfen:
+    So kann ich dein Leben einfacher machen:
 
-    • /search um alles von Anmeldung bis Beruf zu finden
-    • /language um die Sprache zu ändern
-    • /settings um die Einstellungen zu ändern
-    • /help wenn Hilfe benötigt wird
+    • /search, um Informationen zu allem Möglichen zu finden, von Anmeldung bis Jobsuche
+    • /language, um in deiner bevorzugten Sprache zu kommunizieren
+    • /settings, um deine Einstellungen zu ändern
+    • /help, wenn du weitere Hilfe brauchst
 
-    Wie kann ich weiterhelfen?
-  search_prompt: "Bitte gib ein Wort ein nach dem du suchst. Zum Beispiel '/search_anmeldung'."
-  articles_found: "🕵🏼‍♀️ Wir haben zum Thema %{topic} folgendes gefunden:
-  
+    Was suchst du heute?
+  search_prompt: "🚨 Bitte gib ein Stichwort zum Suchen ein. Zum Beispiel 'Anmeldung'."
+  articles_found: "🕵🏼‍♀️ Hier ist, was wir zum Thema %{topic} gefunden haben:
+
   "
-  no_article_found: 'Schade, zum Thema %{topic} haben wir nichts gefunden!
-  
-  Probier vielleicht ein anderes Wort aus? 🤔'
+  no_article_found: 'Wir konnten leider nichts über %{topic} finden, tut mir leid! Vielleicht versuchst du ein anderes Wort? 🤔'
   settings_response: |
-    Hier sind die Einstellungen:
+    Lass uns deine Einstellungen anpassen:
 
-    • /language um die Sprache zu ändern
-    • /name um den Namen zu ändern
-  default_response: "Entschuldigung, das habe ich nicht verstanden. Versuche es mit /help für weitere Optionen."
-  unknown_command_response: "Entschuldigung, das habe ich nicht verstanden. Versuche es mit /help für mehr Optionen."
+    • /language, um deine Sprache zu ändern
+    • /name, um deinen Namen zu aktualisieren
 
-languages:
-  en: "English"
-  de: "Deutsch"
-  uk: "Ukrainian"
-  ar: "Arabic"
-  fa: "Persian"
-  tr: "Turkish"
-  fr: "French"
-  ps: "Pashto"
-  ru: "Russian"
-  he: "Hebrew"
+    Möchtest du sonst noch etwas ändern?
+  change_language: |
+    Du kannst die Sprache dieses Bots ändern. Momentan sind diese Sprachen verfügbar: %{languages}
+    Um die Sprache zu ändern, aktualisiere bitte die Sprache in den Benutzereinstellungen deiner Telegram-App.
+  unknown_command_response: "Das habe ich nicht ganz verstanden. Vielleicht hilft /help uns weiter?"

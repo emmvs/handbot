@@ -1,13 +1,13 @@
 en:
   initial_greeting: |
     👋 Welcome, %{username}!
-    I’m HandBot, and I am here to help you navigate life in Germany 🇩🇪
+    I’m HandBot, and I am here to help you navigate life in Germany 🇩🇪
 
-    You can ask me about things like Anmeldung 📄, finding a flat 🏠, public transportation 🚂, or accessing healthcare services 🤒.
+    To best assist you, please type /languages to see the available languages.
 
-    Let's make your journey smooth!
-
-    Just type what you need help with or use /search to explore topics.
+    • /help for help on how to use the app
+    • /search to search for something
+    • /settings to search for something
 
     How can I help you today? ☀️
   help_response: |
@@ -16,10 +16,10 @@ en:
     • /search to find information on anything from Anmeldung to job hunting
     • /language to communicate in your preferred language
     • /settings to change your settings
-    • /help if you need more guidance
+    • Go to https://together-in-germany.de/de for more guidance
 
     What are you looking for today?
-  search_prompt: "🚨 Please provide a keyword to search for. For example, type '/search_anmeldung'."
+  search_prompt: "🚨 Please provide a keyword to search for. For example, just type 'Anmeldung'."
   articles_found: "🕵🏼‍♀️ Here is what we found on the topic of %{topic}:
 
   "
@@ -28,20 +28,12 @@ en:
     Let's adjust your settings:
 
     • /language to change your language
-    • /name to update your name
+    • /help for help on how to use the app
 
     Anything else you'd like to tweak?
-  default_response: "Hmm, I’m not sure what that was. Can you try /help or specify what you need?"
+  change_language: |
+    You can change the language of this bot. At the moment, these languages are available:
+    
+    %{languages}
+    To change the language, please update the language in the user settings of your Telegram app.
   unknown_command_response: "I didn’t quite catch that. Maybe /help could guide us?"
-
-languages:
-  en: "English"
-  de: "German"
-  uk: "Ukrainian"
-  ar: "Arabic"
-  fa: "Persian"
-  tr: "Turkish"
-  fr: "French"
-  ps: "Pashto"
-  ru: "Russian"
-  he: "Hebrew"
