@@ -1,20 +1,23 @@
 # frozen_string_literal: true
 
-# The WebhooksController handles incoming webhook requests from Telegram API
-# responding to messages sent to the Telegram bot associated with this application.
-# It includes methods for validating and processing incoming messages (`callback`),
-# acknowledging webhook setup (`receive`), and sending messages back to the user
-# via the TelegramCommandService
+# The WebhooksController handles incoming webhook requests from the Telegram API,
+# responding to messages sent to the Telegram bot associated with this application
+#
+# The main entry point is the `receive` method, which determines the type of request
+# and delegates processing to the appropriate handler
+#
+# Example usage:
+# - When a message request is received, the bot processes the message and sends a response
+# - When an inline query is received, the bot searches for relevant results and responds accordingly
+#
 class WebhooksController < ApplicationController
   # Uncomment if you need to skip CSRF token verification
   # skip_before_action :verify_authenticity_token
 
   def receive
     if message_request?
-      p "🟢 /message #{params[:message]}"
       handle_message(params[:message])
     elsif inline_query_request?
-      p "🔵 [inline query] #{params[:inline_query]}"
       handle_inline_query(params[:inline_query])
     else
       render_invalid_request
@@ -25,10 +28,12 @@ class WebhooksController < ApplicationController
 
   def message_request?
     params[:message].present?
+    p "🟢 /message #{params[:message]}"
   end
 
   def inline_query_request?
     params[:inline_query].present?
+    p "🔵 [inline query] #{params[:inline_query]}"
   end
 
   def render_invalid_request
