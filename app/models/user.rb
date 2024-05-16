@@ -16,7 +16,7 @@
 # of critical attributes and checks for supported languages to cater to internationalization.
 #
 class User
-  DEFAULT_LANGUAGE = 'en'
+  # DEFAULT_LANGUAGE = 'en'
   SUPPORTED_LANGUAGES = {
     'en' => 'English',
     'de' => 'German',
@@ -25,7 +25,7 @@ class User
     'fa' => 'Persian',
     'tr' => 'Turkish',
     'fr' => 'French',
-    'ps' => 'Pashto',
+    # 'ps' => 'Pashto',
     'ru' => 'Russian'
   }.freeze
 
@@ -46,7 +46,10 @@ class User
   private
 
   def ensure_supported_language(language)
-    SUPPORTED_LANGUAGES.key?(language) ? language : DEFAULT_LANGUAGE
+    if SUPPORTED_LANGUAGES.key?(language)
+      language
+    end
+    # SUPPORTED_LANGUAGES.key?(language) ? language : DEFAULT_LANGUAGE
   end
 
   def chat_id_valid?
