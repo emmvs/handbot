@@ -57,24 +57,26 @@
 # Türkçe (Turkish) Français (French)پښتو (Pashto) Pусский (Russian) Українська (Ukrainian)
 # Im sorry, I did not find the article in your language, maybe this will be helpful: [article in Eng/Ger/etc.]
 
+# Researach about langauge within bot
+
 # API w/ full database of articles of handbook Germany
 
-# Need more help? Share your phone number, etc.
+# Need more help? >> Add Together in Germany in help section
 # HandBook Germany wants to collect what data?
 
 # Notes
 # Super popular bot by the government
 # http://t.me/Diia_help_bot
 
-# ? When restarting ngrok, we also need to restart the webhook
+# ? When restarting ngrok, we also need to reset the webhook
 # TODO: Update YOUR_BOT_TOKEN="your_bot_token_here"
 # TODO: Update ngrok link w/ new ngrok url
 
-# YOUR_BOT_TOKEN="TOKEN_STRING"
+# YOUR_BOT_TOKEN="YOUR_BOT_TOKEN_HERE"
 
 # curl -X POST \
 #      -H "Content-Type: application/json" \
-#      -d '{"url": "https://f0bf-213-61-167-82.ngrok-free.app/receive"}' \
+#      -d '{"url": "https://f708-84-130-234-178.ngrok-free.app/receive"}' \
 #      "https://api.telegram.org/bot${YOUR_BOT_TOKEN}/setWebhook"
 
 # When you restart ngrok, it generates a new random URL for your tunnel.

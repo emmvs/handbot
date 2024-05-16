@@ -1,19 +1,37 @@
 tr:
-  telegram_commands:
-    initial_greeting: "👋 Merhaba %{username}! HandBot'a hoş geldiniz!"
-    help_response: |
-      HandBot'u nasıl kullanabileceğiniz aşağıda belirtilmiştir:
+  initial_greeting: |
+    👋 Hoş geldin, %{username}!
+    Ben HandBot, ve Almanya'daki yaşamında sana yardımcı olmak için buradayım 🇩🇪
 
-      Aramaya başlamak için '/search' basın.
-      Dilinizi değiştirmek için '/language' basın.
-      Ayarlarınızı değiştirmek için '/settings' basın.
-      Uygun bir yanıt alamazsanız '/help' basın.
+    Sana en iyi şekilde yardımcı olabilmem için, mevcut dilleri görmek için /languages yaz.
 
-      Size nasıl yardımcı olabilirim?
-    settings_response: |
-      İşte ayar seçenekleriniz:
+    • /help uygulamanın nasıl kullanılacağı hakkında yardım almak için
+    • /search bir şey aramak için
+    • /settings ayarlarını değiştirmek için
 
-      Dilinizi değiştirmek için '/language' basın.
-      İsminizi değiştirmek için '/name' basın.
-    default_response: "Üzgünüm, anlamadım. Daha fazla seçenek için '/help' deneyin."
-    unknown_command_response: "Üzgünüm, anlamadım. Daha fazla seçenek için '/help' deneyin."
+    Sana bugün nasıl yardımcı olabilirim? ☀️
+  help_response: |
+    İşte hayatını nasıl kolaylaştırabilirim:
+
+    • /search Anmeldung'dan iş aramaya kadar her şey hakkında bilgi bulmak için
+    • /language tercih ettiğin dilde iletişim kurmak için
+    • /settings ayarlarını değiştirmek için
+    • /help daha fazla rehberliğe ihtiyacın varsa
+
+    Bugün ne arıyorsun?
+  search_prompt: "🚨 Lütfen aramak için bir anahtar kelime gir. Örneğin, sadece 'Anmeldung' yaz."
+  articles_found: "🕵🏼‍♀️ İşte %{topic} konusuyla ilgili bulduklarımız:
+
+  "
+  no_article_found: 'Üzgünüz, %{topic} hakkında bir şey bulamadık! Belki başka bir kelime denersin? 🤔'
+  settings_response: |
+    Ayarlarını düzenleyelim:
+
+    • /language dili değiştirmek için
+    • /name adını güncellemek için
+
+    Başka bir şeyi ayarlamak ister misin?
+  change_language: |
+    Bu botun dilini değiştirebilirsin. Şu anda bu diller mevcut: %{languages}
+    Dili değiştirmek için lütfen Telegram uygulamasının kullanıcı ayarlarından dili güncelle.
+  unknown_command_response: "Bunu tam olarak anlamadım. Belki /help bize yardımcı olabilir?"

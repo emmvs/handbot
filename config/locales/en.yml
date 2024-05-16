@@ -1,41 +1,39 @@
 en:
-  telegram_commands:
-    initial_greeting: |
-      👋 Hello %{username}! Welcome to HandBot!
-      Here's how you can use HandBot:
+  initial_greeting: |
+    👋 Welcome, %{username}!
+    I’m HandBot, and I am here to help you navigate life in Germany 🇩🇪
 
-      Press '/search' to begin your search.
-      Press '/language' to change your language.
-      Press '/settings' to change your settings.
-      Press '/help' if you need further assistance.
+    To best assist you, please type /languages to see the available languages.
 
-      How can I assist you?
-    help_response: |
-      Here's how you can use HandBot:
+    • /help for help on how to use the app
+    • /search to search for something
+    • /settings to search for something
 
-      Press '/search' to begin your search.
-      Press '/language' to change your language.
-      Press '/settings' to change your settings.
-      Press '/help' if you need further assistance.
+    How can I help you today? ☀️
+  help_response: |
+    Here’s how I can make your life easier:
 
-      How can I assist you?
-    prompt_for_search: "What topic are you interested in? Just type it in, and I'll search for it!"
-    settings_response: |
-      Here are your settings options:
+    • /search to find information on anything from Anmeldung to job hunting
+    • /language to communicate in your preferred language
+    • /settings to change your settings
+    • Go to https://together-in-germany.de/de for more guidance
 
-      Press '/language' to change your language.
-      Press '/name' to change your name.
-    default_response: "Sorry, I didn't understand that. Try '/help' for more options."
-    unknown_command_response: "Sorry, I didn't understand that. Try '/help' for more options."
+    What are you looking for today?
+  search_prompt: "🚨 Please provide a keyword to search for. For example, just type 'Anmeldung'."
+  articles_found: "🕵🏼‍♀️ Here is what we found on the topic of %{topic}:
 
-  languages:
-    en: "English"
-    de: "German"
-    uk: "Ukrainian"
-    ar: "Arabic"
-    fa: "Persian"
-    tr: "Turkish"
-    fr: "French"
-    ps: "Pashto"
-    ru: "Russian"
-    he: "Hebrew"
+  "
+  no_article_found: 'We were not able to find anything about %{topic}, sorry! Maybe try another word? 🤔'
+  settings_response: |
+    Let's adjust your settings:
+
+    • /language to change your language
+    • /help for help on how to use the app
+
+    Anything else you'd like to tweak?
+  change_language: |
+    You can change the language of this bot. At the moment, these languages are available:
+    
+    %{languages}
+    To change the language, please update the language in the user settings of your Telegram app.
+  unknown_command_response: "I didn’t quite catch that. Maybe /help could guide us?"
