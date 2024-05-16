@@ -10,51 +10,64 @@ class WebhooksController < ApplicationController
   # skip_before_action :verify_authenticity_token
 
   def receive
-    if valid_message_received?
-      process_user_message
-      render json: { message: 'Message processed successfully' }, status: :ok
+    if message_request?
+      p "🟢 /message #{params[:message]}"
+      handle_message(params[:message])
+    elsif inline_query_request?
+      p "🟡 [inline query] #{params[:inline_query]}"
+      handle_inline_query(params[:inline_query])
     else
-      render json: { error: 'Invalid request' }, status: :bad_request
+      render_invalid_request
     end
   end
 
   private
 
-  def valid_message_received?
+  def message_request?
     params[:message].present?
   end
 
-  def process_user_message
-    extract_user_info
-    telegram_service = TelegramCommandService.new(@user)
-    response = telegram_service.call
-    send_message(@user.chat_id, response)
+  def inline_query_request?
+    params[:inline_query].present?
   end
 
-  def extract_user_info
-    chat_id = extract_param(:message, :chat, :id)
-    chat_type = extract_param(:message, :chat, :type)
-    username = determine_username
-    language_code = extract_param(:message, :from, :language_code)
-    command_input = extract_param(:message, :text)
-
-    @user = User.new(chat_id, chat_type, username, language_code, command_input)
+  def render_invalid_request
+    render json: { error: 'Invalid request' }, status: :bad_request
   end
 
-  def extract_param(*keys)
-    params.dig(*keys)
+  def handle_message(message)
+    user = extract_user_info(message)
+    response = TelegramCommandService.new(user).call
+    send_message(user.chat_id, response) unless response.nil?
   end
 
-  def determine_username
-    first_name = extract_param(:message, :from, :first_name)
-    username = extract_param(:message, :from, :username)
-    first_name.empty? ? username : first_name
+  def handle_inline_query(inline_query)
+    user = extract_user_info(inline_query)
+    results = SearchService.new(inline_query[:query], user).search
+    answer_inline_query(inline_query[:id], results)
+  end
+
+  def extract_user_info(data)
+    chat_id = data.dig(:chat, :id)
+    name = data.dig(:from, :first_name) || data.dig(:from, :username)
+    chat_type = data.dig(:chat, :type)
+    language_code = data.dig(:from, :language_code)
+    command_input = data[:text]
+
+    User.new(chat_id, chat_type, name, language_code, command_input)
   end
 
   def send_message(chat_id, text)
-    token = ENV['CHAT_BOT_TOKEN']
-    url = "https://api.telegram.org/bot#{token}/sendMessage"
-    payload = { chat_id:, text: }
-    RestClient.post(url, payload.to_json, content_type: :json, accept: :json)
+    url = "https://api.telegram.org/bot#{ENV['CHAT_BOT_TOKEN']}/sendMessage"
+    HTTParty.post(url, body: { chat_id:, text: }.to_json, headers: { 'Content-Type' => 'application/json' })
+  end
+
+  def answer_inline_query(inline_query_id, results)
+    formatted_results = results.map do |result|
+      { type: 'article', id: result[:id], title: result[:title], input_message_content: { message_text: result[:url] } }
+    end
+
+    url = "https://api.telegram.org/bot#{ENV['CHAT_BOT_TOKEN']}/answerInlineQuery"
+    HTTParty.post(url, body: { inline_query_id:, results: formatted_results.to_json }.to_json, headers: { 'Content-Type' => 'application/json' })
   end
 end
