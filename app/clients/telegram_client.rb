@@ -1,15 +1,8 @@
 # frozen_string_literal: true
 
-# The TelegramClient manages HTTP requests to the Telegram API.
-#
-# This client is responsible for sending messages and answering inline queries
+# The TelegramClient is responsible for sending messages and answering inline queries
 # via the Telegram bot API. It abstracts the HTTP requests and makes it easier
-# to send and manage interactions with Telegram.
-#
-# Example usage:
-#   TelegramClient.send_message(chat_id, "Hello, World!")
-#   TelegramClient.answer_inline_query(inline_query_id, formatted_results)
-#
+# to send and manage interactions with Telegram
 class TelegramClient
   BASE_URL = "https://api.telegram.org/bot#{ENV['CHAT_BOT_TOKEN']}".freeze
 
