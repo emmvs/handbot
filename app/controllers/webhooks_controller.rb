@@ -2,14 +2,6 @@
 
 # The WebhooksController handles incoming webhook requests from the Telegram API,
 # responding to messages sent to the Telegram bot associated with this application
-#
-# The main entry point is the `receive` method, which determines the type of request
-# and delegates processing to the appropriate handler
-#
-# Example usage:
-# - When a message request is received, the bot processes the message and sends a response
-# - When an inline query is received, the bot searches for relevant results and responds accordingly
-#
 class WebhooksController < ApplicationController
   # Uncomment if you need to skip CSRF token verification
   # skip_before_action :verify_authenticity_token
@@ -20,8 +12,9 @@ class WebhooksController < ApplicationController
     elsif inline_query_request?
       handle_inline_query(params[:inline_query])
     else
-      render_invalid_request
+      render_invalid_request && return
     end
+    head :ok
   end
 
   private
@@ -42,17 +35,23 @@ class WebhooksController < ApplicationController
 
   def handle_message(message)
     user = extract_user_info(message)
+    return if user.nil?
+
     response = TelegramCommandService.new(user).call
     TelegramClient.send_message(user.chat_id, response) unless response.nil?
   end
 
   def handle_inline_query(inline_query)
     user = extract_user_info(inline_query)
+    return if user.nil?
+
     results = SearchService.new(inline_query[:query], user).search
     TelegramClient.answer_inline_query(inline_query[:id], format_inline_results(results))
   end
 
   def extract_user_info(data)
+    return nil if data.nil?
+
     chat_id = data.dig(:chat, :id)
     name = data.dig(:from, :first_name) || data.dig(:from, :username)
     chat_type = data.dig(:chat, :type)
