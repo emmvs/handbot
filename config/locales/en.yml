@@ -1,25 +1,22 @@
 en:
   initial_greeting: |
-    👋 Welcome, %{username}!
+    👋 Hi, %{username}!
     I’m HandBot, and I am here to help you navigate life in Germany 🇩🇪
-
-    To best assist you, please type /languages to see the available languages.
-
-    • /help for help on how to use the app
-    • /search to search for something
-    • /settings to search for something
-
-    How can I help you today? ☀️
+    To start, press /languages to see all languages 🌍
+  change_language: |
+    You can change the language of this bot. 💬 At the moment, these languages are available:
+    
+    %{languages}
+    To change the language, please update the language settings of your Telegram app. Please press /help for help on how to use the app 🛟
   help_response: |
-    Here’s how I can make your life easier:
+    Here’s how I can help you:
 
-    • /search to find information on anything from Anmeldung to job hunting
-    • /language to communicate in your preferred language
-    • /settings to change your settings
-    • Go to https://together-in-germany.de/de for more guidance
+    • Press /search to find information on anything from Anmeldung to job hunting
+    • Press /languages to switch to your language
+    • Press /settings to change your settings
 
     What are you looking for today?
-  search_prompt: "🚨 Please provide a keyword to search for. For example, just type 'Anmeldung'."
+  search_prompt: "📚 Please provide a keyword to search for. For example, just type 'Anmeldung' or 'Visa'."
   articles_found: "🕵🏼‍♀️ Here is what we found on the topic of %{topic}:
 
   "
@@ -27,13 +24,9 @@ en:
   settings_response: |
     Let's adjust your settings:
 
-    • /language to change your language
-    • /help for help on how to use the app
+    • Press /languages to switch to your language
+    • Press /help for help on how to use the app
+    • Press https://together-in-germany.de/de for more guidance
 
-    Anything else you'd like to tweak?
-  change_language: |
-    You can change the language of this bot. At the moment, these languages are available:
-    
-    %{languages}
-    To change the language, please update the language in the user settings of your Telegram app.
+    Anything else you'd like to do?
   unknown_command_response: "I didn’t quite catch that. Maybe /help could guide us?"

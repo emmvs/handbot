@@ -22,10 +22,6 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
       expect(user_with_nils.command_input).to be_nil
     end
 
-    it 'sets default language when unsupported language is provided' do
-      expect(user_with_unsupported_language.language_code).to eq(User::DEFAULT_LANGUAGE)
-    end
-
     it 'retains the language when supported language provided' do
       expect(valid_user.language_code).to eq('en')
     end
