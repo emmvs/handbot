@@ -1,5 +1,7 @@
-# README
-Welcome to the HandBot app - This document provides all the necessary steps to get the application up and running in your development environment. HandBot is designed to interact with users in a Telegram group, providing responses to user queries based on predefined commands.
+# Handbot
+Now available via Telegram! Add @HandbookGermanyBot to your chat to get started!
+
+Welcome to the HandBot App (Ruby on Rails Telegram Bot) - This document provides all the necessary steps to get the application up and running in your development ensvironment. HandBot is designed to interact with users in a Telegram group, providing responses to user queries based on predefined commands.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -11,7 +13,7 @@ These instructions will get you a copy of the project up and running on your loc
 * A Telegram bot token (obtainable through BotFather)
 
 ## Ruby Version
-This application requires Ruby version X.X.X. You can check your Ruby version using:
+Ensure you have the correct Ruby version installed. You can check your Ruby version using:
 
 `ruby -v`
 
@@ -46,7 +48,7 @@ Create and migrate your database:
 ## Running the Test Suite
 Run the RSpec test suite to ensure everything is set up correctly:
 
-`rspec`
+`bundle exec rspec`
 
 ## How It Works
 Add Bot to Your Telegram Group: Follow the instructions from BotFather to add your bot to a Telegram group. The bot cannot initiate conversations with users but can respond to messages sent to it.
@@ -65,3 +67,8 @@ Ensure that your database is set up and migrated on the host.
 ## Additional Notes
 Remember to keep your Telegram bot token secure and not expose it in your codebase.
 For detailed Telegram bot development documentation, visit Telegram Bot API.
+
+## Contributing
+Contributions of all sizes are welcome. Please review our contribution guidelines to get started. You can also help by reporting bugs or feature requests.
+
+## License

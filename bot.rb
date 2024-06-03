@@ -1,88 +1,102 @@
-# require 'telegram/bot'
-# require 'httparty'
-# require 'nokogiri'
+# frozen_string_literal: true
 
-# token = ENV['CHAT_BOT_TOKEN']
+# OVERVIEW
+# How the Rails app works with the Telegram API
+# & what is triggered at every step
 
-# Telegram::Bot::Client.run(token) do |bot|
-#   bot.listen do |message|
-#     if message.text.downcase.include?("start")
-#       bot.api.send_message(
-#         chat_id: message.chat.id, 
-#         text: "👋 Hey there! 
-#         Welcome to HandBot! 
-#         We're here to help you find information about Germany through handbookgermany.de. 
-#         Please select one of the following options to get started:
+# Initialization
+# The app initializes the Telegram bot using a token obtained from environment variables (ENV['CHAT_BOT_TOKEN'])
 
-#         Press '/start' to begin your search 
-#         Press '/help' if you don't get a proper response from the bot 
+# Webhook Management
+# The app sets a webhook to receive messages from Telegram
+# Each time ngrok/the web server is restarted, a new URL is generated, necessitating an update to the webhook URL
 
-#         How can I help you?")
-#     else
-#       search_query = message.text
-#       response = HTTParty.get("https://handbookgermany.de/en/search/content?keys=#{URI.encode(search_query)}")
-#       parsed_content = Nokogiri::HTML(response.body)
-#       articles = parsed_content.css('.item')[0..2]
-#       if articles.empty?
-#         bot.api.send_message(chat_id: message.chat.id, text: "I couldn't find any articles related to '#{search_query.downcase}'.")
-#       else
-#         articles_info = articles.map do |article|
-#           title = article.css('h4').text.strip
-#           url = article.css('a')['href']
-#           "#{title}: #{url}"
-#         end.join("\n")
-#         bot.api.send_message(chat_id: message.chat.id, text: articles_info + "Was this what you were looking for?")
-#       end
-#     end
-#   end
-# end
+# Replace YOUR_BOT_TOKEN with your bot's token and NEW_NGROK_URL with the current ngrok URL.
+# You can do this directly within your terminal (bash)
 
-# Send a message to person w/ user ID
-# https://api.telegram.org/botBOT_TOKEN/sendMessage?chat_id=262447015&text=Hello
+# YOUR_BOT_TOKEN="12345678_YOUR_TOKEN_HERE"
+# NEW_NGROK_URL="https://2d0d-185-104-138-53.ngrok-free.app"
 
-# https://api.telegram.org/botBOT_TOKEN/sendMessage?chat_id=#{user_id}&text=#{text}
-
-# https://api.telegram.org/botBOT_TOKEN/sendMessage?chat_id=#{group_id}&text=#{text}
-
-# Get Webhook Info
-# https://api.telegram.org/botBOT_TOKEN/getWebhookInfo
-
-# TODO: First message is the most important
-# Should it be personal or not so personal (firstname, info, etc.)
-# Inputs need to be readable, for example, typos, different languages, etc.
-# => Ai and/or Elastic Search
-
-# Choose your language (9 languages)
-# Deutsch (German) Englishاَلْعَرَبِيَّة (Arabic)فارسی/دری (Persian)
-# Türkçe (Turkish) Français (French)پښتو (Pashto) Pусский (Russian) Українська (Ukrainian)
-# Im sorry, I did not find the article in your language, maybe this will be helpful: [article in Eng/Ger/etc.]
-
-# Researach about langauge within bot
-
-# API w/ full database of articles of handbook Germany
-
-# Need more help? >> Add Together in Germany in help section
-# HandBook Germany wants to collect what data?
-
-# Notes
-# Super popular bot by the government
-# http://t.me/Diia_help_bot
-
-# ? When restarting ngrok, we also need to reset the webhook
-# TODO: Update YOUR_BOT_TOKEN="your_bot_token_here"
-# TODO: Update ngrok link w/ new ngrok url
-
-# YOUR_BOT_TOKEN="YOUR_BOT_TOKEN_HERE"
-
-# curl -X POST \
-#      -H "Content-Type: application/json" \
-#      -d '{"url": "https://f708-84-130-234-178.ngrok-free.app/receive"}' \
-#      "https://api.telegram.org/bot${YOUR_BOT_TOKEN}/setWebhook"
-
-# When you restart ngrok, it generates a new random URL for your tunnel.
-# Since the Telegram bot's webhook URL is configured to use the ngrok URL,
-# you'll need to update the webhook URL with the new ngrok URL every time you restart ngrok
-# This needs to happen until the app gets deloyed and we have the same URL
+# curl -X POST -H "Content-Type: application/json" -d "{\"url\": \"${NEW_NGROK_URL}/receive\"}" "https://api.telegram.org/bot${YOUR_BOT_TOKEN}/setWebhook"
 
 # You should get the output below 👇🏻
 # {"ok":true,"result":true,"description":"Webhook was set"}
+
+# Please check your variables again if you get the following:
+# {"ok":true,"result":true,"description":"Webhook is already deleted"}
+
+# Get Webhook Info
+# curl "https://api.telegram.org/bot${YOUR_BOT_TOKEN}/getWebhookInfo"
+
+# Commands List
+# /start - Start the bot and provides an introduction
+# /help - Get help information
+# /search - Initiates a search for information
+# /settings - Allows changing bot settings
+# /languages - Allows changing the language
+
+# Notes
+# - Personalization:
+#   The bot can be personalized to greet users by their first name and provide language-specific responses
+# - Error Handling:
+#   Ensures users are informed when no relevant search results are found
+# - Webhook Management:
+#   Needs regular updating with the new ngrok URL until deployment with a fixed URL
+
+# Send a message to person w/ user ID
+# https://api.telegram.org/bot${YOUR_BOT_TOKEN}/sendMessage?chat_id=262447015&text=Hello
+
+# https://api.telegram.org/bot${YOUR_BOT_TOKEN}/sendMessage?chat_id=#{user_id}&text=#{text}
+
+# https://api.telegram.org/bot${YOUR_BOT_TOKEN}/sendMessage?chat_id=#{group_id}&text=#{text}
+
+# ADDITIONALLY
+# => Ai and/or Elastic Search
+# => What about typos?
+# => Enable 9 HandbookGermany Languages available on website
+# => Im sorry, I did not find the article in your language, maybe this will be helpful: [article in Eng/Ger/etc.]
+
+# Send /languages to Telegram
+
+# start - Start the bot
+# help - Get help
+# search - Search for information
+# settings - Change settings
+# languages - Change language
+# los_gehts - Starte den Bot
+# hilfe - Hilfe erhalten
+# suche - Suche nach Informationen
+# einstellungen - Einstellungen ändern
+# sprachen - Sprache ändern
+# почати - Запустити бота
+# допомога - Отримати допомогу
+# пошук - Пошук інформації
+# налаштування - Змінити налаштування
+# мови - Змінити мову
+# başlat - Botu başlat
+# yardım - Yardım al
+# ara - Bilgi ara
+# ayarlar - Ayarları değiştir
+# diller - Dili değiştir
+# commencer - Démarrer le bot
+# aide - Obtenir de l'aide
+# recherche - Rechercher des informations
+# paramètres - Modifier les paramètres
+# langues - Changer de langue
+# начать - Запустить бота
+# помощь - Получить помощь
+# поиск - Поиск информации
+# настройки - Изменить настройки
+# языки - Изменить язык
+
+# ابدأ - بدء الروبوت
+# مساعدة - الحصول على المساعدة
+# بحث - البحث عن المعلومات
+# إعدادات - تغيير الإعدادات
+# لغات - تغيير اللغة
+
+# شروع - راه‌اندازی ربات
+# کمک - دریافت کمک
+# جستجو - جستجوی اطلاعات
+# تنظیمات - تغییر تنظیمات
+# زبان‌ها - تغییر زبان
