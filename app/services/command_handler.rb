@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
+
+require_relative '../../lib/command_definitions'
+
 # The CommandHandler handles all commands sent to the Telegram bot
 # (/start, /help, /search, /settings, /language) in a single, reusable component
 # Each public method within the service corresponds to a specific command,
 # simplifying the command processing workflow within the bot's controllers or other services
 class CommandHandler < ApplicationService
+  include CommandDefinitions
+
   HANDBOOK_BASE_URI = ENV['HANDBOOK_BASE_URI']
 
   attr_reader :user, :args, :user_language
@@ -24,19 +29,23 @@ class CommandHandler < ApplicationService
 
   def process_command(command) # rubocop:disable Metrics/MethodLength
     case command
-    when '/start'
+    when command_for(:start)
       send_initial_greeting
-    when '/help'
+    when command_for(:help)
       translate('help_response')
-    when '/search'
+    when command_for(:search)
       translate('search_prompt')
-    when '/settings'
+    when command_for(:settings)
       translate('settings_response')
-    when '/languages'
+    when command_for(:languages)
       translate('change_language', languages: formatted_languages)
     else
       translate('unknown_command_response')
     end
+  end
+
+  def command_for(action)
+    CommandDefinitions::COMMAND_SETS.fetch(@user.language_code, CommandDefinitions::COMMAND_SETS['en'])[action]
   end
 
   def perform_search(query)
