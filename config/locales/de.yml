@@ -1,37 +1,32 @@
 de:
   initial_greeting: |
-    👋 Willkommen, %{username}!
-    Ich bin HandBot, und ich bin hier, um dir das Leben in Deutschland 🇩🇪 zu erleichtern
-
-    Um dir am besten zu helfen, tippe /languages, um die verfügbaren Sprachen zu sehen.
-
-    • /help für Hilfe zur Nutzung der App
-    • /search, um nach etwas zu suchen
-    • /settings, um deine Einstellungen zu ändern
-
-    Wie kann ich dir heute helfen? ☀️
+    👋 Hallo, %{username}!
+    Ich bin HandBot und ich bin hier, um dir zu helfen, dich in Deutschland zurechtzufinden 🇩🇪
+    Um zu starten, drücke /sprachen, um alle Sprachen zu sehen 🌍
+  change_language: |
+    Du kannst die Sprache dieses Bots ändern. 💬 Derzeit sind diese Sprachen verfügbar:
+    
+    %{languages}
+    Um die Sprache zu ändern, aktualisiere bitte die Spracheinstellungen deiner Telegram-App. Drücke /hilfe für Hilfe zur Nutzung der App 🛟
   help_response: |
-    So kann ich dein Leben einfacher machen:
+    Hier ist, wie ich dir helfen kann:
 
-    • /search, um Informationen zu allem Möglichen zu finden, von Anmeldung bis Jobsuche
-    • /language, um in deiner bevorzugten Sprache zu kommunizieren
-    • /settings, um deine Einstellungen zu ändern
-    • /help, wenn du weitere Hilfe brauchst
+    • Drücke /suche, um Informationen zu allem von Anmeldung bis Jobsuche zu finden
+    • Drücke /sprachen, um deine Sprache zu wechseln
+    • Drücke /einstellungen, um deine Einstellungen zu ändern
 
     Was suchst du heute?
-  search_prompt: "🚨 Bitte gib ein Stichwort zum Suchen ein. Zum Beispiel 'Anmeldung'."
+  search_prompt: "📚 Bitte gib ein Stichwort zum Suchen ein. Zum Beispiel, gib einfach 'Anmeldung' oder 'Visum' ein."
   articles_found: "🕵🏼‍♀️ Hier ist, was wir zum Thema %{topic} gefunden haben:
 
   "
-  no_article_found: 'Wir konnten leider nichts über %{topic} finden, tut mir leid! Vielleicht versuchst du ein anderes Wort? 🤔'
+  no_article_found: 'Wir konnten leider nichts zum Thema %{topic} finden, sorry! Vielleicht versuchst du es mit einem anderen Wort? 🤔'
   settings_response: |
     Lass uns deine Einstellungen anpassen:
 
-    • /language, um deine Sprache zu ändern
-    • /name, um deinen Namen zu aktualisieren
+    • Drücke /sprachen, um deine Sprache zu wechseln
+    • Drücke /hilfe für Hilfe zur Nutzung der App
+    • Besuche https://together-in-germany.de/de für weitere Anleitungen
 
-    Möchtest du sonst noch etwas ändern?
-  change_language: |
-    Du kannst die Sprache dieses Bots ändern. Momentan sind diese Sprachen verfügbar: %{languages}
-    Um die Sprache zu ändern, aktualisiere bitte die Sprache in den Benutzereinstellungen deiner Telegram-App.
-  unknown_command_response: "Das habe ich nicht ganz verstanden. Vielleicht hilft /help uns weiter?"
+    Möchtest du sonst noch etwas tun?
+  unknown_command_response: "Das habe ich nicht ganz verstanden. Vielleicht könnte /hilfe uns weiterhelfen?"
